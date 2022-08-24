@@ -20,14 +20,11 @@ app.get('/',(req,res)=>{
     nav_home: 'active'
   });
 })
-app.get('/blogs',(req,res)=>{
+app.get('/blogs',async(req,res)=>{
+  let blogs = await Blog.find().lean().sort({ date: 'desc' });
   res.render('blogs',{
+    blogs: blogs,
     nav_blogs: 'active'
-  });
-})
-app.get('/blog',(req,res)=>{
-  res.render('blog',{
-    nav_blog: 'active'
   });
 })
 app.get('/search',async(req,res)=>{
